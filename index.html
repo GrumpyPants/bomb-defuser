@@ -1,0 +1,165 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Bomb Defuser</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <script src="scripts/scale.fix.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="scripts/horizontalWires.js"></script>
+    <script src="scripts/button.js"></script>
+    <script src="scripts/knob.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="wrapper">
+    <header class="without-description">
+        <h1>Bomb Defuser</h1>
+        <p></p>
+        <p class="view"><a href="https://github.com/GrumpyPants">View the Project on GitHub <small>GrumpyPants</small></a></p>
+        <ul>
+            <li class="single"><a href="https://github.com/GrumpyPants/bomb-defuser">View On <strong>GitHub</strong></a></li>
+        </ul>
+    </header>
+    <section>
+        <h3>
+            <a id="welcome-to-defuser-pages" class="anchor" href="#welcome-to-defuser-pages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Welcome to the Bomb Defuser Tools.</h3>
+
+        <p>This is a simple set of bomb defusal tools to be used for <a href="http://www.keeptalkinggame.com/">Keep Talking and Nobody Explodes</a>.</p> This is a work in progress and currently only works for version 1 (verification code 241) of the bomb manual which can be found <a href="http://www.bombmanual.com/manual/1/pdf/Bomb-Defusal-Manual_1.pdf">here</a>.</p>
+
+        <!--Horizontal Wires-->
+        <h3>
+            <a id="horizontal-wires" class="anchor" href="#horizontal-wires" aria-hidden="true"><span class="octicon octicon-link"></span></a>Horizontal Wires</h3>
+
+        <label> Number of wires:</label>
+        <select id = "wireNumberSelector" onChange="wireNumberChangeHandler(event)">
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option selected>6</option>
+        </select>
+        <br>
+        <select class="wireColorSelector">
+            <option selected >red</option>
+            <option>white</option>
+            <option>blue</option>
+            <option>yellow</option>
+            <option>black</option>
+        </select>
+        <br>
+        <select class="wireColorSelector">
+            <option selected >red</option>
+            <option>white</option>
+            <option>blue</option>
+            <option>yellow</option>
+            <option>black</option>
+        </select>
+        <br>
+        <select class="wireColorSelector">
+            <option selected >red</option>
+            <option>white</option>
+            <option>blue</option>
+            <option>yellow</option>
+            <option>black</option>
+        </select>
+        <br>
+        <select class="wireColorSelector">
+            <option selected >red</option>
+            <option>white</option>
+            <option>blue</option>
+            <option>yellow</option>
+            <option>black</option>
+        </select>
+        <br>
+        <select class="wireColorSelector">
+            <option selected >red</option>
+            <option>white</option>
+            <option>blue</option>
+            <option>yellow</option>
+            <option>black</option>
+        </select>
+        <br>
+        <select class="wireColorSelector">
+            <option selected >red</option>
+            <option>white</option>
+            <option>blue</option>
+            <option>yellow</option>
+            <option>black</option>
+        </select>
+
+        <br>
+        <div id = "radioHolder">
+            Is the last digit of the serial number odd? <br>
+            <input type="radio" name="oddLastDigit" value="yes" checked>Yes<br>
+            <input type="radio" name="oddLastDigit" value="no">No
+        </div>
+        <br>
+        <Button onClick="solveWirePuzzle()">Solve</Button>
+        <br>
+        <label id="horizontalWireResultLabel"></label>
+        <br>
+        <br>
+
+        <!--The Button-->
+        <h3>
+            <a id="the-button" class="anchor" href="#the-button" aria-hidden="true"><span class="octicon octicon-link"></span></a>The Button</h3>
+        Color: <input type="radio" name="buttonColor" value="white">White
+        <input type="radio" name="buttonColor" value="blue">Blue
+        <input type="radio" name="buttonColor" value="yellow">Yellow
+        <input type="radio" name="buttonColor" value="red">Red
+        </br>
+        Label: <input type="radio" name="buttonLabel" value="abort">Abort
+        <input type="radio" name="buttonLabel" value="hold">Hold
+        <input type="radio" name="buttonLabel" value="detonate">Detonate
+        </br>
+        Number of batteries: <input type="text" id="buttonBatteries" placeholder="Insert number value">
+        </br>
+        Indicators: <input id="indicatorCAR" type="checkbox" name="buttonIndicators" value="CAR">CAR
+        <input id="indicatorFRK" type="checkbox" name="buttonIndicators" value="FRK">FRK
+        </br></br>
+        Solution: <div id="buttonResult"></div>
+        <div id="releaseHeldButtonText" style="display: none">
+            </br>
+            Blue strip: release when the countdown timer has a 4 in any position.</br>
+            White strip: release when the countdown timer has a 1 in any position.</br>
+            Yellow strip: release when the countdown timer has a 5 in any position.</br>
+            Any other color strip: release when the countdown timer has a 1 in any position.</br></br>
+        </div>
+        <button type="button" id="SolveButtonPuzzle" onClick="solveButtonPuzzle()">Solve</button></br></br>
+
+        <!--The Knob-->
+        <h3>
+            <a id="designer-templates" class="anchor" href="#the-knob" aria-hidden="true"><span class="octicon octicon-link"></span></a>The Knob</h3>
+
+        1 = light is on </br>
+        0 = light is off </br>
+        For example: 110000 means that only the first two LEDs are on.<br>
+        Both keys needed in order to guarantee a correct answer.</br>
+
+        <input type="text" id="configurationKey1" placeholder="configuration key 1">
+        <input type="text" id="configurationKey2" placeholder="configuration key 2">
+        <button type="button" id="solveButton" onClick="solveKnobPuzzle()">Solve</button></br></br>
+        <label>Solution: </label><label id ="resultLabel"></label></br></br>
+
+
+        <h3>
+            <a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+
+        <p><a href="https://github.com/GrumpyPants" class="user-mention">@GrumpyPants</a> and <a href="https://github.com/TheKurampus" class="user-mention">@TheKurampus</a></p>
+
+    </section>
+</div>
+<footer>
+    <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+</footer>
+<!--[if !IE]><script>fixScale(document);</script><![endif]-->
+
+</body>
+</html>
